@@ -1,3 +1,4 @@
+import {useState} from 'react'
 import {Image, StyleSheet, Text, View} from 'react-native';
 import colors from '../../theme/color';
 import fonts from '../../theme/fonts';
@@ -15,6 +16,13 @@ interface IFeedPost {
 }
 
 const FeedPost = ({post}: IFeedPost) => {
+
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false)
+  
+  const toggleDescriptionExpanded = () => {
+    setIsDescriptionExpanded(existingValue => !existingValue);
+  }
+
   return (
     // Header
     <View style={styles.post}>
@@ -81,10 +89,12 @@ const FeedPost = ({post}: IFeedPost) => {
         </Text>
 
         {/* post description */}
-        <Text style={styles.text}>
+        <Text style={styles.text} numberOfLines={isDescriptionExpanded ? 0 : 3}>
           <Text style={styles.bold}>{post.user.username}</Text>{' '}
           {post.description}
         </Text>
+
+        <Text onPress={toggleDescriptionExpanded} >{isDescriptionExpanded ? 'less' : 'more'}</Text>
 
         <Text>View all {post.nofComments} comments</Text>
         {post.comments.map(comment => (
