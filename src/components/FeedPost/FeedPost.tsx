@@ -6,20 +6,26 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 
+import Comment from '../Comment/Comment';
 import styles from './styles';
+import { IPost } from '../../types/models';
 
-const FeedPost = () => {
+interface IFeedPost {
+  post: IPost
+}
+
+const FeedPost = ({post}: IFeedPost) => {
   return (
     // Header
     <View style={styles.post}>
       <View style={styles.header}>
         <Image
           source={{
-            uri: 'https://smileworld.in/wp-content/uploads/2021/09/Facebook-Profile-Photo-Free-Download.jpg',
+            uri: post.user.image,
           }}
           style={styles.userAvatar}
         />
-        <Text style={styles.userName}>Sumit</Text>
+        <Text style={styles.userName}>{post.user.username}</Text>
 
         <Entypo
           style={styles.threedots}
@@ -32,7 +38,7 @@ const FeedPost = () => {
       <Image
         // resizeMode="contain"
         source={{
-          uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEXwLPiCBOZ7oBN87cWbl-Z2_IRApG3Wr5rA&usqp=CAU',
+          uri: post.image,
         }}
         style={styles.image}
       />
@@ -71,34 +77,22 @@ const FeedPost = () => {
 
         <Text style={styles.text}>
           Liked by <Text style={styles.bold}>sumit</Text> and{' '}
-          <Text style={styles.bold}>66 others</Text>
+          <Text style={styles.bold}>{post.nofLike} others</Text>
         </Text>
 
         {/* post description */}
         <Text style={styles.text}>
-          <Text style={styles.bold}>Sumit</Text> Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Fugiat, corrupti iusto itaque fuga
-          incidunt cumque earum voluptates harum eveniet nobis cum culpa illo
-          velit neque. Architecto impedit sed necessitatibus consequuntur.
+          <Text style={styles.bold}>{post.user.username}</Text>{' '}
+          {post.description}
         </Text>
 
-        {/* comments */}
-        <Text>View all 16 comments</Text>
-        <View style={styles.comment}>
-          <Text style={styles.commenttext}>
-            <Text style={styles.bold}>Sumit</Text> Lorem ipsum dolor sit amet
-            consectetur adipisicing elit.
-          </Text>
-          <AntDesign
-            name={'hearto'}
-            size={16}
-            style={styles.icon}
-            color={colors.black}
-          />
-        </View>
+        <Text>View all {post.nofComments} comments</Text>
+        {post.comments.map(comment => (
+          <Comment key={comment.id} comment={comment} />
+        ))}
 
         {/* posted date */}
-        <Text>13 March , 2023</Text>
+        <Text>{post.createdAt}</Text>
       </View>
     </View>
   );
