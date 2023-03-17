@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Pressable, Text, View} from 'react-native';
 import colors from '../../theme/color';
 import fonts from '../../theme/fonts';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -7,6 +7,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 
+import DoublePressable from '../DoublePressable';
 import Comment from '../Comment/Comment';
 import styles from './styles';
 import { IPost } from '../../types/models';
@@ -18,10 +19,16 @@ interface IFeedPost {
 const FeedPost = ({post}: IFeedPost) => {
 
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false)
+  const [isLiked, setIsLiked] = useState(true)
   
   const toggleDescriptionExpanded = () => {
     setIsDescriptionExpanded(existingValue => !existingValue);
   }
+
+  const toggleLike = () => {
+    setIsLiked(existingValue => !existingValue);
+  }
+
 
   return (
     // Header
@@ -43,6 +50,7 @@ const FeedPost = ({post}: IFeedPost) => {
       </View>
 
       {/* Content */}
+      <DoublePressable onDoublePress={toggleLike}>
       <Image
         // resizeMode="contain"
         source={{
@@ -50,16 +58,19 @@ const FeedPost = ({post}: IFeedPost) => {
         }}
         style={styles.image}
       />
+      </DoublePressable>
 
       {/* Footer */}
       <View style={styles.footer}>
         <View style={styles.iconContainer}>
+          <Pressable onPress={toggleLike}>  
           <AntDesign
-            name={'hearto'}
+            name={isLiked ? 'heart' : 'hearto'}
             size={24}
             style={styles.icon}
-            color={colors.black}
+            color={isLiked ? colors.accent : colors.black}
           />
+          </Pressable>
 
           <Ionicons
             name="chatbubble-outline"
