@@ -112,7 +112,7 @@ const FeedPost = ({post,isVisible}: IFeedPost) => {
 
         <Text style={styles.text}>
           Liked by <Text style={styles.bold}>sumit</Text> and{' '}
-          <Text style={styles.bold}>{post.nofLike} others</Text>
+          <Text style={styles.bold}>{post.nofLikes} others</Text>
         </Text>
 
         {/* post description */}
