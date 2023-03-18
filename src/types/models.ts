@@ -2,7 +2,7 @@ export interface IPost {
     id: string;
     createdAt: string;
     image?: string;
-    imgaes?: string[];
+    images?: string[];
     video?: string;
     description: string;
     user: IUser;
