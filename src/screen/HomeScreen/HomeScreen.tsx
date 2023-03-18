@@ -7,7 +7,7 @@ const HomeScreen = () => {
 
   const [activePostId, setActivePostId] = useState(null)
 
-  const viewabilityConfig : ViewabilityConfig = {
+  const viewabilityConfig  = {
     itemVisiblePercentThreshold: 51,
   };
 

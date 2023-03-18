@@ -1,10 +1,11 @@
 import {StyleSheet, ScrollView,FlatList, View} from 'react-native';
 import HomeScreen from './src/screen/HomeScreen/HomeScreen';
+import CommentScreen from './src/screen/CommentScreen/CommentScreen';
 
 const App = () => {
   return (
     <View style={styles.app}>
-      <HomeScreen />
+      <CommentScreen />
     </View>
   );
 };
