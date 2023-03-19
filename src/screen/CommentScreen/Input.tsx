@@ -1,7 +1,17 @@
 import {View, Text, Image, TextInput, StyleSheet} from 'react-native';
 import colors from '../../theme/color';
+import fonts from '../../theme/fonts';
+import {useState} from 'react';
 
 const Input = () => {
+  const [newComment, setNewComment] = useState('');
+
+  const onPost = () => {
+    console.warn('posting the coment');
+
+    setNewComment('')
+  };
+
   return (
     <View style={styles.root}>
       <Image
@@ -10,8 +20,16 @@ const Input = () => {
         }}
         style={styles.image}
       />
-      <TextInput style={styles.input} placeholder="Write your comment..." />
-      <Text style={styles.button}>Post</Text>
+      <TextInput
+        value={newComment}
+        onChangeText={newText => setNewComment(newText)}
+        style={styles.input}
+        placeholder="Write your comment..."
+        multiline
+      />
+      <Text onPress={onPost} style={styles.button}>
+        Post
+      </Text>
     </View>
   );
 };
@@ -21,7 +39,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 5,
     borderWidth: 1,
-    borderColor: colors.border
+    borderColor: colors.border,
+    alignItems: "flex-end"
   },
   image: {
     width: 40,
@@ -34,14 +53,20 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
     borderWidth: 1,
     borderRadius: 25,
-    
+
     paddingVertical: 5,
+    paddingRight: 50,
     paddingHorizontal: 10,
-    marginLeft: 5
+    marginLeft: 5,
   },
   button: {
-
-  }
+    position: 'absolute',
+    right: 15,
+    bottom: 15,
+    fontSize: fonts.size.s,
+    fontWeight: fonts.weight.full,
+    color: colors.primary,
+  },
 });
 
 export default Input;
