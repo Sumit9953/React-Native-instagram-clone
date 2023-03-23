@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         flex: 1,
         margin: 5
     },
-    text: {
+    text: { 
         color: colors.black,
         fontWeight: fonts.weight.semi
     }
