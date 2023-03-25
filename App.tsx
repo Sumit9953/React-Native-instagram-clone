@@ -7,7 +7,7 @@ import EditProfileScreen from './src/screen/EditProfileScreen';
 const App = () => {
   return (
     <View style={styles.app}>
-      <EditProfileScreen />
+      <HomeScreen />
     </View>
   );
 };
